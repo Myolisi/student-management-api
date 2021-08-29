@@ -1,5 +1,6 @@
 package com.webtonic.student_management_api.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,13 +8,14 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "course")
-public class CourseEntity {
+public class Course {
     @Id
     @SequenceGenerator(name= "course_seq", sequenceName = "course_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "course_seq")
@@ -22,7 +24,7 @@ public class CourseEntity {
     @NotBlank(message = "Course code is required")
     @Column(
             nullable = false,
-            columnDefinition = "VARCHAR(5)"
+            columnDefinition = "VARCHAR(10)"
 
     )
     private String code;
@@ -40,4 +42,9 @@ public class CourseEntity {
             columnDefinition = "char(1)"
     )
     private char grade;
+
+    @JsonIgnore //dont include this to results
+    //create an associate table to store all the relations
+    @ManyToMany(mappedBy = "course", cascade = CascadeType.ALL)
+    private List<Student> student;
 }
