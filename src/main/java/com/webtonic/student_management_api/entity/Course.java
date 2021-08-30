@@ -2,6 +2,7 @@ package com.webtonic.student_management_api.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,9 +15,11 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Table(name = "course")
 public class Course {
     @Id
+    // create the table sequence
     @SequenceGenerator(name= "course_seq", sequenceName = "course_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "course_seq")
     private Long id;
