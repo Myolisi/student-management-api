@@ -19,7 +19,7 @@ public class StudentController {
 
     //add new student record
     @PostMapping("/add")
-    private Student add(@Validated @RequestBody Student student){
+    private List<Student> add(@Validated @RequestBody List<Student> student ){
         return studentService.addStudent(student);
     }
 
@@ -28,4 +28,5 @@ public class StudentController {
     private List<Student> getAll(){
         return studentService.getStudentCourses();
     }
+
 }
