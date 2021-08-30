@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 @Service
 public class StudentService {
@@ -19,11 +20,16 @@ public class StudentService {
         this.courseRepository = courseRepository;
     }
 
-    public Student addStudent(Student student){
-        if(!student.getCourse().isEmpty()){
-            courseRepository.saveAll(student.getCourse());
-        }
-        return studentRepository.save(student);
+    public List<Student> addStudent(List<Student> student){
+
+        // add each student
+        student.forEach(eachStudent -> {
+            if(!eachStudent.getCourse().isEmpty()){
+                courseRepository.saveAll(eachStudent.getCourse());
+            }
+        });
+
+        return studentRepository.saveAll(student);
     }
 
     public List<Student> getStudentCourses(){

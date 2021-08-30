@@ -33,13 +33,13 @@ public class Student {
     private String firstName;
 
 
-    @NotBlank(message = "Last name is required.")
-    @Length(min = 2, max = 60, message = "Last name should be between 2 and 50 characters long")
+    @NotBlank(message = "Surname is required.")
+    @Length(min = 2, max = 60, message = "Surname should be between 2 and 50 characters long")
     @Column(
             nullable = false,
             columnDefinition = "VARCHAR(60)"
     )
-    private String lastName;
+    private String surname;
 
     @NotNull(message = "Student number is required")
     @Column(
